@@ -1,6 +1,6 @@
 {
   "name": "point-to-city-js",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "A package to get the city from a point(latitude and longitude) with the Google Maps Api",
   "main": "./lib/index.js",
   "scripts": {
@@ -20,8 +20,5 @@
     "babel-preset-env": "^1.2.2",
     "babel-preset-es2015": "^6.24.0",
     "uglify-js": "^2.8.18"
-  },
-  "dependencies": {
-    "xmlhttprequest": "^1.8.0"
   }
 }

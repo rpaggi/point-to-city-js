@@ -1,21 +1,25 @@
-const XMLHttpRequest = require("xmlhttprequest").XMLHttpRequest;
-
-const accessGoogleMapsApi = (latitude, longitude, cb) => {
-	let xhr = new XMLHttpRequest();
+function accessGoogleMapsApi (latitude, longitude, cb) {
    const url = 'https://maps.googleapis.com/maps/api/geocode/json?latlng='+latitude+','+longitude+'&sensor=true'
 
-	xhr.open('GET', url, true)
-	xhr.responseType = 'arraybuffer'
-	xhr.onload = (error) => {
-      if(error){
-         return null;
-      }
-      cb(JSON.parse(xhr.responseText))
-   }
-	xhr.send()
+	fetch(url, {
+		method: 'get'
+	}).then(function (response) {
+		if (response.status === 400) {
+			cb(null)
+		}
+
+		response.json().then((json) => {
+			cb(json)
+		})
+
+	}).catch(function (err) {
+		// Error :(
+		console.log(err);
+		cb(null)
+	});
 }
 
-const extractName = (response) => {
+function extractName (response) {
    var res = response.results
    for(var key in res[0].address_components){
       if(res[0].address_components[key].types[0] === 'administrative_area_level_2'){
@@ -24,11 +28,12 @@ const extractName = (response) => {
    }
 }
 
-const getCityByPoint = (latitude, longitude, cb) => {
+function getCityByPoint (latitude, longitude, cb) {
    accessGoogleMapsApi(latitude, longitude, (response) => {
+	
       let city = null
 
-      if(response.status !== 'ZERO_RESULTS')
+      if(response !== null)
          city = extractName(response)   
 
       cb(city)
