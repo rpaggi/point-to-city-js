@@ -1,15 +1,18 @@
-const request = require ('request');
+const XMLHttpRequest = require("xmlhttprequest").XMLHttpRequest;
 
 const accessGoogleMapsApi = (latitude, longitude, cb) => {
+	let xhr = new XMLHttpRequest();
    const url = 'https://maps.googleapis.com/maps/api/geocode/json?latlng='+latitude+','+longitude+'&sensor=true'
 
-   request.get(url, (error, response, body) => {
+	xhr.open('GET', url, true)
+	xhr.responseType = 'arraybuffer'
+	xhr.onload = (error) => {
       if(error){
          return null;
       }
-
-      cb(JSON.parse(body))
-   })
+      cb(JSON.parse(xhr.responseText))
+   }
+	xhr.send()
 }
 
 const extractName = (response) => {
