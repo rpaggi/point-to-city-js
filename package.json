@@ -1,6 +1,6 @@
 {
   "name": "point-to-city-js",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "A package to get the city from a point(latitude and longitude) with the Google Maps Api",
   "main": "./lib/index.js",
   "scripts": {
