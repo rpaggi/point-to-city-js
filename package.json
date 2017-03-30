@@ -1,0 +1,27 @@
+{
+  "name": "point-to-city-js",
+  "version": "0.0.1",
+  "description": "A package to get the city from a point(latitude and longitude) with the Google Maps Api",
+  "main": "./lib/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "babel": "babel ./src/index.js --out-file ./src/index.tmp.js",
+    "uglify": "uglifyjs --compress --mangle -o ./lib/index.js -- ./src/index.tmp.js",
+    "build": "npm run babel && npm run uglify && rm -rf ./src/index.tmp.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/rpaggi/point-to-city-js.git"
+  },
+  "author": "rpaggi",
+  "license": "MIT",
+  "devDependencies": {
+    "babel-cli": "^6.24.0",
+    "babel-preset-env": "^1.2.2",
+    "babel-preset-es2015": "^6.24.0",
+    "uglify-js": "^2.8.18"
+  },
+  "dependencies": {
+    "request": "^2.81.0"
+  }
+}
